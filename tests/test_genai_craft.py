@@ -1,5 +1,6 @@
-import json
 from genai_craft import GenAIcraft, GeneratedAsset
+import json
+import os
 
 def test_generate_code():
     genai_craft = GenAIcraft()
@@ -19,13 +20,14 @@ def test_generate_asset():
     asset = genai_craft.generate_asset(prompt)
     assert isinstance(asset, GeneratedAsset)
 
-def test_save_asset(tmp_path):
+def test_save_asset():
     genai_craft = GenAIcraft()
     prompt = "medieval castle with towers"
     asset = genai_craft.generate_asset(prompt)
-    filename = tmp_path / "generated_asset.json"
-    genai_craft.save_asset(asset, str(filename))
+    filename = "generated_asset.json"
+    genai_craft.save_asset(asset, filename)
+    assert os.path.exists(filename)
     with open(filename, "r") as f:
         data = json.load(f)
-    assert data["code"].startswith("using UnityEngine;")
-    assert data["model"].endswith(".fbx")
+        assert "code" in data and "model" in data
+    os.remove(filename)

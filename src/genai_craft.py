@@ -30,11 +30,11 @@ class GenAIcraft:
         with open(filename, "w") as f:
             json.dump({"code": asset.code, "model": asset.model}, f)
 
-    def main(self):
-        genai_craft = GenAIcraft()
-        prompt = "medieval castle with towers"
-        asset = genai_craft.generate_asset(prompt)
-        genai_craft.save_asset(asset, "generated_asset.json")
+def main():
+    genai_craft = GenAIcraft()
+    prompt = "medieval castle with towers"
+    asset = genai_craft.generate_asset(prompt)
+    genai_craft.save_asset(asset, "generated_asset.json")
 
 if __name__ == "__main__":
-    GenAIcraft().main()
+    main()

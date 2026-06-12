@@ -1,18 +1,12 @@
-# GenAI-Craft SDK
+# GenAIcraft
 
-The GenAI-Craft SDK provides a simple way to integrate AI features into your game development workflow.
-
-## Installation
-
-To install the SDK, use the Unity Package Manager or Unreal Plugin Manager.
+A simple project for generating C# code and 3D models from text prompts.
 
 ## Usage
 
-1. Create an instance of the `SDK` class, passing in the name, version, and engine.
-2. Call the `install` method to install the SDK.
-3. Call the `integrate` method to integrate the SDK with the engine's asset pipeline.
-4. Call the `get_sample_project` method to retrieve a sample project.
+1. Run `python src/genai_craft.py` to generate an asset from a prompt.
+2. The generated asset will be saved to a file named `generated_asset.json`.
 
 ## Testing
 
-To run the tests, use the `pytest` command.
+1. Run `python -m pytest tests/test_genai_craft.py` to run the tests.
