@@ -1,40 +1,60 @@
 import json
 from dataclasses import dataclass
-from typing import List
 
 @dataclass
-class GeneratedAsset:
-    code: str
-    model: str
+class AIParameters:
+    temperature: float
+    top_p: float
 
-class GenAIcraft:
+class GenAI:
     def __init__(self):
-        self.prompts = {}
+        self.parameters = AIParameters(temperature=1.0, top_p=0.9)
 
-    def generate_code(self, prompt: str) -> str:
-        # Simple example of generating C# code for Unity
-        code = f"using UnityEngine;\npublic class {prompt.capitalize()} : MonoBehaviour {{\n}}\n"
-        return code
+    def generate_content(self):
+        # Simulate content generation based on parameters
+        return f"Generated content with temperature {self.parameters.temperature} and top_p {self.parameters.top_p}"
 
-    def generate_model(self, prompt: str) -> str:
-        # Simple example of generating a 3D model (.fbx) from a text prompt
-        model = f"{prompt}.fbx"
-        return model
+    def update_parameters(self, temperature, top_p):
+        self.parameters = AIParameters(temperature=temperature, top_p=top_p)
 
-    def generate_asset(self, prompt: str) -> GeneratedAsset:
-        code = self.generate_code(prompt)
-        model = self.generate_model(prompt)
-        return GeneratedAsset(code, model)
+    def get_parameters(self):
+        return self.parameters
 
-    def save_asset(self, asset: GeneratedAsset, filename: str):
-        with open(filename, "w") as f:
-            json.dump({"code": asset.code, "model": asset.model}, f)
+class UI:
+    def __init__(self, genai):
+        self.genai = genai
+
+    def display_parameters(self):
+        parameters = self.genai.get_parameters()
+        print(f"Current parameters: temperature={parameters.temperature}, top_p={parameters.top_p}")
+
+    def update_parameters(self, temperature, top_p):
+        self.genai.update_parameters(temperature, top_p)
 
 def main():
-    genai_craft = GenAIcraft()
-    prompt = "medieval castle with towers"
-    asset = genai_craft.generate_asset(prompt)
-    genai_craft.save_asset(asset, "generated_asset.json")
+    genai = GenAI()
+    ui = UI(genai)
+
+    while True:
+        print("1. Display parameters")
+        print("2. Update parameters")
+        print("3. Generate content")
+        print("4. Quit")
+
+        choice = input("Choose an option: ")
+
+        if choice == "1":
+            ui.display_parameters()
+        elif choice == "2":
+            temperature = float(input("Enter new temperature: "))
+            top_p = float(input("Enter new top_p: "))
+            ui.update_parameters(temperature, top_p)
+        elif choice == "3":
+            print(genai.generate_content())
+        elif choice == "4":
+            break
+        else:
+            print("Invalid choice. Please choose again.")
 
 if __name__ == "__main__":
     main()

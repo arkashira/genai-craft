@@ -1,12 +1,6 @@
-# GenAIcraft
-
-A simple project for generating C# code and 3D models from text prompts.
+# GenAI Craft
+A simple project demonstrating real-time parameter updates for AI-generated content.
 
 ## Usage
-
-1. Run `python src/genai_craft.py` to generate an asset from a prompt.
-2. The generated asset will be saved to a file named `generated_asset.json`.
-
-## Testing
-
-1. Run `python -m pytest tests/test_genai_craft.py` to run the tests.
+1. Run `python -m pytest` to test the implementation.
+2. Run `python src/genai_craft.py` to interact with the UI.
